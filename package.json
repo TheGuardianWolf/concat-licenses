@@ -24,6 +24,7 @@
     "concat",
     "cli"
   ],
+  "preferGlobal": true,
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.3",
