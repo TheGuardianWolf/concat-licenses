@@ -22,7 +22,9 @@
   "keywords": [
     "license",
     "concat",
-    "cli"
+    "cli",
+    "licenses",
+    "join"
   ],
   "preferGlobal": true,
   "license": "MIT",
