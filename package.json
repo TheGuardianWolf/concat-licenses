@@ -9,7 +9,7 @@
     "url": "http://github.com/TheGuardianWolf/concat-licenses/issues"
   },
   "name": "concat-licenses",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Concatenates all license files of node modules used in a project into a single text file.",
   "main": "./lib/index.js",
   "scripts": {
