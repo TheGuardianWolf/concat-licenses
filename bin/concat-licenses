@@ -9,8 +9,6 @@ Code licensed under the BSD License:
 http://yuilibrary.com/license/
 */
 
-
-/*jshint esversion:6 */
 var concatLicenses = require('../lib/index');
 
 var args = require('../lib/args').parse();
@@ -30,6 +28,7 @@ if (args.help) {
         '   --search [filepath] look in the following npm project directory.',
         '   --out [filepath] write the data to a specific file.',
         '   --exclude [list] exclude modules which licenses are in the comma-separated list from the output',
+        '   --includeCurrent include the license for the current module in concatenated file.',
         '',
         '   --version The current version',
         '   --help  The text you are reading right now :)',

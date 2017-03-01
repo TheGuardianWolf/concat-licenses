@@ -13,15 +13,16 @@ concat-licenses --out=./LICENSE.lib.txt
 ```
 
 ## Options
-* --production only show production dependencies.',
-* --development only show development dependencies.',
-* --unknown report guessed licenses as unknown licenses.',
-* --onlyunknown only list packages with unknown or guessed licenses.',
+* --production only show production dependencies.
+* --development only show development dependencies.
+* --unknown report guessed licenses as unknown licenses.
+* --onlyunknown only list packages with unknown or guessed licenses.
 * --search [filepath] look in the following npm project directory.
 * --out [filepath] write the data to a specific file.
-* --exclude [list] exclude modules which licenses are in the comma-separated list from the output
-* --version The current version
-* --help  The text you are reading right now :)
+* --exclude [list] exclude modules which licenses are in the comma-separated list from the output.
+* --includeCurrent include the license for the current module in concatenated file.
+* --version The current version.
+* --help  The text you are reading right now :).
 
 ## Module Use
 
@@ -39,6 +40,7 @@ concatLicenses(
         out: null,
         unknown: false,
         onlyunknown: false,
+        includeCurrent: false,
         exclude: null,
         title: 'LICENSES FOR SOFTWARE PACKAGES'
     }, // Options object defaults
