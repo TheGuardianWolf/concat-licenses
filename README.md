@@ -17,6 +17,7 @@ concat-licenses --out=./LICENSE.lib.txt
 * --development only show development dependencies.
 * --unknown report guessed licenses as unknown licenses.
 * --onlyunknown only list packages with unknown or guessed licenses.
+* --warnIfMissing warns if a package does not provide a license file.
 * --search [filepath] look in the following npm project directory.
 * --out [filepath] write the data to a specific file.
 * --exclude [list] exclude modules which licenses are in the comma-separated list from the output.
