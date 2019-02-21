@@ -3,7 +3,7 @@
     "name": "Jerry Fan"
   },
   "bin": {
-    "license-checker": "./bin/concat-licenses"
+    "concat-licenses": "./bin/concat-licenses"
   },
   "bugs": {
     "url": "http://github.com/TheGuardianWolf/concat-licenses/issues"
