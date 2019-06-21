@@ -1,64 +1,59 @@
 #!/usr/bin/env node
 
-/*
-Adapted for concat-licenses by Jerry Fan.
-Modifications licensed under the MIT license.
-
-Copyright (c) 2013, Yahoo! Inc. All rights reserved.
-Code licensed under the BSD License:
-http://yuilibrary.com/license/
-*/
-
 var concatLicenses = require('../lib/index');
+const chalk = require('chalk');
+const process = require('process');
 
-var args = require('../lib/args').parse();
-var mkdirp = require('mkdirp');
-var path = require('path');
-var chalk = require('chalk');
-var fs = require('fs');
+const ver = 'concat-licenses@' + require('../package.json').version
 
-if (args.help) {
-    console.log('concat-licenses@' + require('../package.json').version);
-    var usage = [
-        '',
-        '   --production only show production dependencies.',
-        '   --development only show development dependencies.',
-        '   --unknown report guessed licenses as unknown licenses.',
-        '   --onlyunknown only list packages with unknown or guessed licenses.',
-        '   --search [filepath] look in the following npm project directory.',
-        '   --out [filepath] write the data to a specific file.',
-        '   --exclude [list] exclude modules which licenses are in the comma-separated list from the output',
-        '   --includeCurrent include the license for the current module in concatenated file.',
-        '',
-        '   --version The current version',
-        '   --help  The text you are reading right now :)',
-        ''
-    ];
-    console.log(usage.join('\n'), '\n');
+const argv = require('yargs')
+    .usage(ver + '\nUsage: $0 /path/to/output [options]')
+    .help()
+    .describe('version', 'Displays version information')
+    .describe('ignoreMissing', 'Ignore packages that are missing licenses (supresses warnings)')
+    .describe('allowGuess', 'Allow guessed licenses from README and COPYING files (otherwise warns)')
+    .describe('includeCurrent', 'Include the license of the main package in the concatenated licence')
+    .describe('title', 'Title to include on the output file.')
+    .describe('start', 'Set package directory to start from')
+    .describe('production', 'Only include production dependencies')
+    .describe('development', 'Only include development dependencies')
+    .describe('packages', 'Only include licenses from semicolon-seperated list of packages')
+    .describe('excludePackages', 'Exclude licenses from semicolon-seperated list of packages')
+    .describe('excludePrivatePackages', 'Exclude licenses from any package marked as private')
+    .describe('direct', 'Include licenses from direct dependencies only')
+    .boolean(['ignoreMissing', 'strict', 'production', 'development', 'direct'])
+    .string(['_', 'title', 'start', 'packages', 'excludePackages', 'excludePrivatePackages'])
+    .default('start', process.cwd())
+    .default('title', 'LICENSES FOR SOFTWARE PACKAGES')
+    .argv
+
+// Help displays message only
+if (argv.help) {
     process.exit(0);
 }
 
-if (args.version) {
+// Version displays version only
+if (argv.version) {
     console.log(require('../package.json').version);
-    process.exit(1);
+    process.exit(0);
 }
 
-concatLicenses.concat(args, function(err, output) {
-    let formattedOutput = output;
-    //Remove the color tags
-    formattedOutput = chalk.stripColor(formattedOutput);
+// Require filename otherwise
+if (argv._) {
+    if (argv._.length != 1) {
+        console.error(chalk.red.bold('ERROR:') + ' Filename requires exactly one parameter!');
+        process.exit(2);
+    }
+}
 
-    if (err) {
-        console.error('Found error');
-        throw err;
+(async () => {
+    try {
+        await concatLicenses.concat(argv._[0], argv);
+        process.exit(0);
+    }
+    catch(ex) {
+        console.error(ex);
     }
 
-    if (args.out) {
-        var dir = path.dirname(args.out);
-        mkdirp.sync(dir);        
-        fs.writeFileSync(args.out, formattedOutput, 'utf8');
-    }
-    else {
-        process.stdout.write(formattedOutput);
-    }
-});
+    process.exit(1);   
+})();

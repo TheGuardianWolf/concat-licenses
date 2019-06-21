@@ -1,7 +1,10 @@
 {
   "author": {
-    "name": "Jerry Fan"
+    "name": "TheGuardianWolf <nano@pixelcollider.net>"
   },
+  "contributors": [
+    "FabianHenneke"
+  ],
   "bin": {
     "concat-licenses": "./bin/concat-licenses"
   },
@@ -9,7 +12,7 @@
     "url": "http://github.com/TheGuardianWolf/concat-licenses/issues"
   },
   "name": "concat-licenses",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Concatenates all license files of node modules used in a project into a single text file.",
   "main": "./lib/index.js",
   "scripts": {
@@ -17,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/TheGuardianWolf/concat-licenses.git"
+    "url": "https://github.com/TheGuardianWolf/concat-licenses.git"
   },
   "keywords": [
     "license",
@@ -29,9 +32,10 @@
   "preferGlobal": true,
   "license": "MIT",
   "dependencies": {
-    "chalk": "^1.1.3",
-    "license-checker": "^8.0.4",
+    "chalk": "^2.4.2",
+    "license-checker": "^25.0.1",
     "mkdirp": "^0.5.1",
-    "nopt": "^4.0.1"
+    "strip-ansi": "^5.2.0",
+    "yargs": "^13.2.4"
   }
 }
