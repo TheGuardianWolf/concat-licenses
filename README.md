@@ -8,6 +8,11 @@ license file that can be used for redistributable packages.
 This package is based off [davglass/license-checker](https://github.com/davglass/license-checker) 
 and uses its functionalities for finding licenses.
 
+With the detection of licenses, it follows ```davglass/license-checker```, with the
+exception that guesses are enabled for explicitly named ```LICENSE``` files only.
+Any other license guesses such as from ```README``` are not allowed and will produce
+a warning. A warning is also given if the file is missing or inaccessable.
+
 ## Usage
 
 ```bash
