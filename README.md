@@ -23,6 +23,7 @@ concat-licenses LICENSE.lib.txt
 
 ## Options
 
+```
 concat-licenses@2.0.0
 Usage: concat-licenses /path/to/output [options]
 
@@ -49,6 +50,7 @@ Options:
                                                                         [string]
   --direct                  Include licenses from direct dependencies only
                                                                        [boolean]
+```
 
 ## Module Use
 
