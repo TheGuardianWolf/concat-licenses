@@ -13,9 +13,6 @@ exception that guesses are enabled for explicitly named `LICENSE` files only.
 Any other license guesses such as from `README` are not allowed and will produce
 a warning. A warning is also given if the file is missing or inaccessable.
 
-This package was not made to be required from another package, and is intended to be a CLI tool
-only.
-
 ## Usage
 
 ```bash
