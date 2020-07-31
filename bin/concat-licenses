@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
-var concatLicenses = require("../lib/index");
+const concatLicenses = require("../lib/index");
 const chalk = require("chalk").default;
 const process = require("process");
+const path = require("path");
+const mkdirp = require("mkdirp");
+const fs = require("fs");
+const { default: stripAnsi } = require("strip-ansi");
 
 const ver = "concat-licenses@" + require("../package.json").version;
 
@@ -39,15 +43,32 @@ if (argv.version) {
 
 // Require filename otherwise
 if (argv._) {
-  if (argv._.length != 1) {
-    console.error(chalk.red.bold("ERROR:") + " Filename requires exactly one parameter!");
+  if (argv._.length >= 1) {
+    console.error(chalk.red.bold("ERROR:") + " Writing to file requires exactly one parameter!");
     process.exit(2);
   }
 }
 
 (async () => {
   try {
-    await concatLicenses.concat(argv._[0], argv);
+    const outfile = argv._[0];
+    const outputFile = outfile ? path.normalize(outfile) : null;
+
+    // Test output file write
+    if (outputFile) {
+      const dir = path.dirname(outputFile);
+      mkdirp.sync(dir);
+      fs.writeFileSync(outputFile, "", "utf8");
+    }
+
+    const outputString = await concatLicenses.concat(argv);
+
+    if (outputFile) {
+      fs.writeFileSync(outputFile, stripAnsi(outputString), "utf8");
+    } else {
+      console.log(outputString);
+    }
+
     process.exit(0);
   } catch (ex) {
     console.error(ex);

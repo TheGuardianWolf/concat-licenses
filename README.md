@@ -15,6 +15,8 @@ a warning. A warning is also given if the file is missing or inaccessable.
 
 ## Usage
 
+### Writing to file
+
 ```bash
 npm install -g concat-licenses
 cd /path/to/work/dir
@@ -28,11 +30,26 @@ cd /path/to/work/dir
 npx concat-licenses LICENSE.lib.txt
 ```
 
+### Logging to console
+
+```bash
+npm install -g concat-licenses
+cd /path/to/work/dir
+concat-licenses
+```
+
+OR
+
+```bash
+cd /path/to/work/dir
+npx concat-licenses
+```
+
 ## Options
 
 ```
 concat-licenses@2.0.0
-Usage: concat-licenses /path/to/output [options]
+Usage: concat-licenses [/path/to/output] [options]
 
 Options:
   --version                 Displays version information               [boolean]
@@ -69,7 +86,7 @@ be used.
 const concatLicenses = require("concat-licenses").concat;
 
 (async () => {
-  const output = await concatLicenses(outputFile, {
+  const output = await concatLicenses({
     ignoreMissing: false,
     allowGuess: false,
     includeCurrent: false,
