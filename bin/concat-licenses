@@ -1,59 +1,57 @@
 #!/usr/bin/env node
 
-var concatLicenses = require('../lib/index');
-const chalk = require('chalk');
-const process = require('process');
+var concatLicenses = require("../lib/index");
+const chalk = require("chalk").default;
+const process = require("process");
 
-const ver = 'concat-licenses@' + require('../package.json').version
+const ver = "concat-licenses@" + require("../package.json").version;
 
-const argv = require('yargs')
-    .usage(ver + '\nUsage: $0 /path/to/output [options]')
-    .help()
-    .describe('version', 'Displays version information')
-    .describe('ignoreMissing', 'Ignore packages that are missing licenses (supresses warnings)')
-    .describe('allowGuess', 'Allow guessed licenses from README and COPYING files (otherwise warns)')
-    .describe('includeCurrent', 'Include the license of the main package in the concatenated licence')
-    .describe('title', 'Title to include on the output file.')
-    .describe('start', 'Set package directory to start from')
-    .describe('production', 'Only include production dependencies')
-    .describe('development', 'Only include development dependencies')
-    .describe('packages', 'Only include licenses from semicolon-seperated list of packages')
-    .describe('excludePackages', 'Exclude licenses from semicolon-seperated list of packages')
-    .describe('excludePrivatePackages', 'Exclude licenses from any package marked as private')
-    .describe('direct', 'Include licenses from direct dependencies only')
-    .boolean(['ignoreMissing', 'strict', 'production', 'development', 'direct'])
-    .string(['_', 'title', 'start', 'packages', 'excludePackages', 'excludePrivatePackages'])
-    .default('start', process.cwd())
-    .default('title', 'LICENSES FOR SOFTWARE PACKAGES')
-    .argv
+const argv = require("yargs")
+  .usage(ver + "\nUsage: $0 /path/to/output [options]")
+  .help()
+  .describe("version", "Displays version information")
+  .describe("ignoreMissing", "Ignore packages that are missing licenses (supresses warnings)")
+  .describe("allowGuess", "Allow guessed licenses from README and COPYING files (otherwise warns)")
+  .describe("includeCurrent", "Include the license of the main package in the concatenated licence")
+  .describe("title", "Title to include on the output file.")
+  .describe("start", "Set package directory to start from")
+  .describe("production", "Only include production dependencies")
+  .describe("development", "Only include development dependencies")
+  .describe("packages", "Only include licenses from semicolon-seperated list of packages")
+  .describe("excludePackages", "Exclude licenses from semicolon-seperated list of packages")
+  .describe("excludePrivatePackages", "Exclude licenses from any package marked as private")
+  .describe("direct", "Include licenses from direct dependencies only")
+  .boolean(["ignoreMissing", "strict", "production", "development", "direct"])
+  .string(["_", "title", "start", "packages", "excludePackages", "excludePrivatePackages"])
+  .default("start", process.cwd())
+  .default("title", "LICENSES FOR SOFTWARE PACKAGES").argv;
 
 // Help displays message only
 if (argv.help) {
-    process.exit(0);
+  process.exit(0);
 }
 
 // Version displays version only
 if (argv.version) {
-    console.log(require('../package.json').version);
-    process.exit(0);
+  console.log(require("../package.json").version);
+  process.exit(0);
 }
 
 // Require filename otherwise
 if (argv._) {
-    if (argv._.length != 1) {
-        console.error(chalk.red.bold('ERROR:') + ' Filename requires exactly one parameter!');
-        process.exit(2);
-    }
+  if (argv._.length != 1) {
+    console.error(chalk.red.bold("ERROR:") + " Filename requires exactly one parameter!");
+    process.exit(2);
+  }
 }
 
 (async () => {
-    try {
-        await concatLicenses.concat(argv._[0], argv);
-        process.exit(0);
-    }
-    catch(ex) {
-        console.error(ex);
-    }
+  try {
+    await concatLicenses.concat(argv._[0], argv);
+    process.exit(0);
+  } catch (ex) {
+    console.error(ex);
+  }
 
-    process.exit(1);   
+  process.exit(1);
 })();
