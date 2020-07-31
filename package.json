@@ -12,7 +12,7 @@
     "url": "http://github.com/TheGuardianWolf/concat-licenses/issues"
   },
   "name": "concat-licenses",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "engines": {
     "node": ">=8.16.2"
   },
