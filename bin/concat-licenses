@@ -11,8 +11,8 @@ const { default: stripAnsi } = require("strip-ansi");
 const ver = "concat-licenses@" + require("../package.json").version;
 
 const argv = require("yargs")
-  .usage(ver + "\nUsage: $0 /path/to/output [options]")
   .help()
+  .usage(ver + "\nUsage: $0 /path/to/output [options]")
   .describe("version", "Displays version information")
   .describe("ignoreMissing", "Ignore packages that are missing licenses (supresses warnings)")
   .describe("allowGuess", "Allow guessed licenses from README and COPYING files (otherwise warns)")
@@ -43,7 +43,7 @@ if (argv.version) {
 
 // Require filename otherwise
 if (argv._) {
-  if (argv._.length >= 1) {
+  if (argv._.length > 1) {
     console.error(chalk.red.bold("ERROR:") + " Writing to file requires exactly one parameter!");
     process.exit(2);
   }
