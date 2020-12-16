@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -31,7 +31,6 @@ jobs:
       uses: actions/upload-artifact@v2.2.1
       with:
         # Artifact name
-        name: 'licenses.test.txt' # optional, default is artifact
+        name: 'licenses.${{ matrix.node-version }}.txt' # optional, default is artifact
         # A file, directory or wildcard pattern that describes what to upload
         path: 'licenses.test.txt'
-        warn: true
